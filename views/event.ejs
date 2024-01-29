@@ -1,0 +1,35 @@
+<% if (checkRole.role == 'Admin') { %>
+  <div class="container-fluid flex flex-wrap items-center justify-center mt-5 relative">
+    <a href="/events/add" class="btn btn-primary">Add Event</a>
+  </div>
+<% } %>
+
+<div class="container-fluid flex flex-wrap items-center justify-center min-h-screen">
+    <% data.forEach((item)=> { %>
+
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-4 relative">
+        <figure><img
+            src="https://img.freepik.com/premium-vector/modern-creative-isolated-esports-tournament-emblem-logo-vector-gaming-league-sports-team_126068-221.jpg"
+            alt="Shoes"/></figure>
+        <div class="card-body">
+          <h1 class="card-title">
+            <%= item.name %>
+          </h1>
+          <p>
+            <%= item.place %>
+          </p>
+          <p class="absolute bottom-10 left-6">
+            <%= formatDate(item.schedule)%>
+          </p>
+
+          <div class="card-actions flex justify-end">
+            <a href="<%= checkRole.role == 'Admin' ? `/events/${item.id}/delete` : `/events/${item.id}/join` %>" 
+              class="<%= checkRole.role == 'Admin' ? `btn btn-error` : `btn btn-primary` %>" role="button"><%= checkRole.role == 'Admin' ? `Delete Event` : `Join Event` %></a>
+          </div>
+          
+        </div>
+      </div>
+
+      <% }) %>
+
+  </div>
